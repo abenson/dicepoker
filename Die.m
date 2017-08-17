@@ -1,0 +1,35 @@
+#import "Die.h"
+
+@implementation Die
+
++die
+{
+	return [[[self alloc] init] autorelease];
+}
+
+-init
+{
+	self = [super init];
+	if(self) {
+		[self roll];
+	}
+	return self;
+}
+
+-(int)value
+{
+	return m_value;
+}
+
+-(int)roll
+{
+	m_value = (rand() % 6) + 1;
+	return m_value;
+}
+
+-description
+{
+	return [NSString stringWithFormat: @"%d", m_value];
+}
+
+@end
