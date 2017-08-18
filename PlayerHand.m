@@ -28,8 +28,19 @@ NSString *stringForPlayerHand(PlayerHand ph) {
 	return nil;
 }
 
-PlayerHand ScoreHand(id hand, int *highest)
+PlayerHand ScoreHand(id hand, int *highVal)
 {
-	*highest = 6;
+	id en, obj, sorted;
+	int val, bestHand;
+
+	sorted = [NSArray sortedArrayUsingComparator: @selector(compare:)];
+	en = [sorted objectEnumerator];
+
+	obj = [en nextObject];
+
+	while( (obj = [en nextObject]))	{
+
+	}
+
 	return Nothing;
 }
