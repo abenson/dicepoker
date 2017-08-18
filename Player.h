@@ -26,4 +26,6 @@
 
 -description;
 
+-(NSComparisonResult)compare: player;
+
 @end

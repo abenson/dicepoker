@@ -32,4 +32,15 @@
 	return [NSString stringWithFormat: @"%d", m_value];
 }
 
+-(NSComparisonResult)compare: die
+{
+	if([die value] > m_value) {
+		return NSOrderedAscending;
+	} else if([die value] < m_value) {
+		return NSOrderedDescending;
+	} else {
+		return NSOrderedSame;
+	}
+}
+
 @end

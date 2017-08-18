@@ -3,7 +3,7 @@
 @interface Game : NSObject
 {
 	id m_players;
-
+	int m_round;
 	int m_pot;
 }
 
@@ -17,6 +17,7 @@
 -description;
 -players;
 
--roll;
+-nextRound;
+-roundWinner;
 
 @end

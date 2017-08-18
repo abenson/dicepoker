@@ -1,5 +1,7 @@
 #import "Player.h"
 
+#import "PlayerHand.h"
+
 int playerCount = 1;
 
 @implementation Player
@@ -66,6 +68,33 @@ int playerCount = 1;
 		m_balance,
 		m_wins,
 		m_hand];
+}
+
+-(NSComparisonResult)compare: player
+{
+	PlayerHand myScore, theirScore;
+	int myHigh, theirHigh;
+
+	myScore = ScoreHand(m_hand, &myHigh);
+	theirScore = ScoreHand([player hand], &theirHigh);
+
+	if(myScore < theirScore) {
+		return NSOrderedAscending;
+	}
+
+	if(myScore > theirScore) {
+		return NSOrderedDescending;
+	}
+
+	if(myHigh < theirHigh) {
+		return NSOrderedAscending;
+	}
+
+	if(myHigh > theirHigh) {
+		return NSOrderedDescending;
+	}
+
+	return NSOrderedSame;
 }
 
 @end

@@ -8,6 +8,7 @@
 	if(self) {
 		m_players = [[NSMutableArray alloc] init];
 		m_pot = 0;
+		m_round = 0;
 	}
 	return self;
 }
@@ -31,7 +32,7 @@
 
 -description
 {
-	return [NSString stringWithFormat: @"%d Players, Pot is $%d", [m_players count], m_pot];
+	return [NSString stringWithFormat: @"Round %d, %d Players, Pot is $%d", m_round, [m_players count], m_pot];
 }
 
 -players
@@ -39,10 +40,40 @@
 	return m_players;
 }
 
--roll
+-nextRound
 {
+	m_round += 1;
 	[m_players makeObjectsPerformSelector:@selector(roll)];
 	return self;
+}
+
+-roundWinner
+{
+	id en, obj;
+	id winner = nil;
+	NSComparisonResult cmp;
+
+	en = [m_players objectEnumerator];
+	winner = [en nextObject];
+
+	while((obj = [en nextObject])) {
+		cmp = [winner compare:obj];
+		switch(cmp) {
+			case NSOrderedSame:
+				winner = nil;
+				break;
+			case NSOrderedDescending:
+				winner = obj;
+				break;
+			case NSOrderedAscending:
+				break;
+		}
+		if(winner == nil) {
+			break;
+		}
+	}
+
+	return winner;
 }
 
 @end
