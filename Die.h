@@ -15,6 +15,6 @@
 
 -description;
 
--(NSComparisonResult)compare: die;
+-(NSComparisonResult)compare: (Die*)die;
 
 @end
