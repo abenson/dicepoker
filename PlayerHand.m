@@ -33,14 +33,14 @@ PlayerHand ScoreHand(id hand, int *highVal)
 	id en, obj, sorted;
 	int val, bestHand;
 
-	sorted = [NSArray sortedArrayUsingComparator: @selector(compare:)];
+	sorted = [hand sortedArrayUsingSelector: @selector(compare:)];
 	en = [sorted objectEnumerator];
 
-	obj = [en nextObject];
+	bestHand = Nothing;
 
 	while( (obj = [en nextObject]))	{
 
 	}
 
-	return Nothing;
+	return bestHand;
 }
