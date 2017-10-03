@@ -45,12 +45,12 @@ int main(int argc, char *argv[])
 
 		winner = [game roundWinner];
 		if(winner) {
-			printf([[NSString stringWithFormat:@"Winner: %@\n", winner] UTF8String]);
 			[winner addWin];
 			[winner adjustBalance: [game pot]];
 			[game setPot: 0];
+			printf([[NSString stringWithFormat:@"Winner: %@\n\n", winner] UTF8String]);
 		} else {
-			printf("Match ended in a draw!\n");
+			printf("Match ended in a draw!\n\n");
 		}
 	}
 
