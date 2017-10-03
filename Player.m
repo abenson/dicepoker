@@ -50,6 +50,12 @@ int playerCount = 1;
 	return self;
 }
 
+-adjustBalance: (int)delta
+{
+	m_balance = m_balance + delta;
+	return self;
+}
+
 -(int)wins
 {
 	return m_wins;
@@ -101,6 +107,17 @@ int playerCount = 1;
 		return NSOrderedDescending;
 	}
 
+	return NSOrderedSame;
+}
+
+
+-(NSComparisonResult)compareBalance: player
+{
+	if(m_balance < [player balance]) {
+		return NSOrderedDescending;
+	} else if(m_balance > [player balance]) {
+		return NSOrderedAscending;
+	}
 	return NSOrderedSame;
 }
 

@@ -20,6 +20,7 @@
 
 -(int)balance;
 -setBalance: (int)balance;
+-adjustBalance: (int)delta;
 
 -(int)wins;
 -addWin;

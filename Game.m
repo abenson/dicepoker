@@ -9,6 +9,7 @@
 		m_players = [[NSMutableArray alloc] init];
 		m_pot = 0;
 		m_round = 0;
+		m_minBet = 1;
 	}
 	return self;
 }
@@ -19,7 +20,30 @@
 	return self;
 }
 
--raisePot: (int)amount
+-setMinBet: (int)minBet
+{
+	m_minBet = minBet;
+	return self;
+}
+
+-adjustMinBet: (int)minBetDelta
+{
+	m_minBet += minBetDelta;
+	return self;
+}
+
+-(int)minBet
+{
+	return m_minBet;
+}
+
+-setPot: (int)amount
+{
+	m_pot = amount;
+	return self;
+}
+
+-adjustPot: (int)amount
 {
 	m_pot += amount;
 	return self;
@@ -42,8 +66,18 @@
 
 -nextRound
 {
+	id en;
+	Player *player;
+
 	m_round += 1;
-	[m_players makeObjectsPerformSelector:@selector(roll)];
+
+	en = [m_players objectEnumerator];
+	while((player = [en nextObject])) {
+		[player roll];
+		[player adjustBalance: -1 * m_minBet];
+		[self adjustPot: m_minBet];
+	}
+
 	return self;
 }
 
@@ -75,5 +109,23 @@
 
 	return winner;
 }
+
+-(BOOL)gameOver
+{
+	id en, obj;
+	en = [m_players objectEnumerator];
+	while((obj = [en nextObject])) {
+		if([obj balance] <= 0) {
+			return YES;
+		}
+	}
+	return NO;
+}
+
+-leaderBoard
+{
+	return [m_players sortedArrayUsingSelector:@selector(compareBalance:)];
+}
+
 
 @end

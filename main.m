@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
 	id winner;
 
-	int i;
+	BOOL cont = YES;
 
 	srand(time(NULL));
 
@@ -26,25 +26,28 @@ int main(int argc, char *argv[])
 	game = [[Game alloc] init];
 
 	printf("Adding a new player...\n");
-	[game addPlayer: [Player player]];
+	[game addPlayer: [[Player player] setBalance: 20]];
 
 	printf("Adding a new player...\n");
-	[game addPlayer: [Player player]];
+	[game addPlayer: [[Player player] setBalance: 20]];
 
 
-	for(i=0; i<5; i++) {
+	while([game gameOver] == NO) {
 		[game nextRound];
-		printf("Starting a round: %s\n", [[game description] cString]);
+		printf([[NSString stringWithFormat:@"Starting a round: %@\n", game] UTF8String]);
 
 		en = [[game players] objectEnumerator];
-
 		while((obj = [en nextObject]))
 		{
-			printf("%s\n", [[obj description] cString]);
+			printf([[NSString stringWithFormat:@"%@\n", obj] UTF8String]);
 		}
+
 		winner = [game roundWinner];
 		if(winner) {
-			printf("Winner: %s\n", [[winner description] cString]);
+			printf([[NSString stringWithFormat:@"Winner: %@\n", winner] UTF8String]);
+			[winner addWin];
+			[winner adjustBalance: [game pot]];
+			[game setPot: 0];
 		} else {
 			printf("Match ended in a draw!\n");
 		}
