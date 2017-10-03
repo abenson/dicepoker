@@ -63,11 +63,18 @@ int playerCount = 1;
 
 -description
 {
-	return [NSString stringWithFormat: @"Player %d: Balance: $%d, Wins: %d, Hand: %@",
+	int high;
+	PlayerHand ph;
+
+	ph = ScoreHand(m_hand, &high);
+
+	return [NSString stringWithFormat: @"Player %d: Balance: $%d, Wins: %d, Hand: %@ %@, High: %d",
 		m_playerNo,
 		m_balance,
 		m_wins,
-		m_hand];
+		stringForPlayerHand(ph),
+		m_hand,
+		high];
 }
 
 -(NSComparisonResult)compare: player
