@@ -34,6 +34,9 @@ int main(int argc, char *argv[])
 
 	while([game gameOver] == NO) {
 		[game nextRound];
+		if(([game round] % 5) == 0) {
+			[game adjustMinBet: 2];
+		}
 		printf([[NSString stringWithFormat:@"Starting a round: %@\n", game] UTF8String]);
 
 		en = [[game players] objectEnumerator];

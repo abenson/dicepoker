@@ -110,6 +110,11 @@
 	return winner;
 }
 
+-(int)round
+{
+	return m_round;
+}
+
 -(BOOL)gameOver
 {
 	id en, obj;
