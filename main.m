@@ -54,6 +54,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	winner = [[game leaderBoard] objectAtIndex: 0];
+	printf([[NSString stringWithFormat:@"Game Winner: %@\n\n", winner] UTF8String]);
+
+
 	[game release];
 
 	[pool release];
