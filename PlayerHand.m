@@ -9,7 +9,7 @@ NSString *stringForPlayerHand(PlayerHand ph) {
 		case Pair:
 			return @"Pair";
 		case TwoPair:
-			return @"TwoPair";
+			return @"Two Pair";
 		case Set:
 			return @"Set";
 		case LowStraight:
