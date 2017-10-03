@@ -18,8 +18,17 @@
 -(int)pot;
 -setPot: (int)amount;
 
+
+-setMinBet: (int)minBet;
+
+-adjustMinBet: (int)minBetDelta;
+
+-(int)minBet;
+
 -description;
 -players;
+
+-(int)round;
 
 -nextRound;
 -roundWinner;

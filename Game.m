@@ -56,7 +56,7 @@
 
 -description
 {
-	return [NSString stringWithFormat: @"Round %d, %d Players, Pot is $%d", m_round, [m_players count], m_pot];
+	return [NSString stringWithFormat: @"Round %d, %d Players, Pot is $%d, Bet is $%d", m_round, [m_players count], m_pot, m_minBet];
 }
 
 -players
@@ -115,7 +115,7 @@
 	id en, obj;
 	en = [m_players objectEnumerator];
 	while((obj = [en nextObject])) {
-		if([obj balance] <= 0) {
+		if([obj balance] < m_minBet) {
 			return YES;
 		}
 	}
