@@ -62,10 +62,10 @@
 			case NSOrderedSame:
 				winner = nil;
 				break;
-			case NSOrderedDescending:
+			case NSOrderedAscending:
 				winner = obj;
 				break;
-			case NSOrderedAscending:
+			case NSOrderedDescending:
 				break;
 		}
 		if(winner == nil) {
