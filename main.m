@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -24,28 +25,28 @@ int main(int argc, char *argv[])
 
 	game = [[Game alloc] init];
 
-	NSLog(@"Adding a new player...");
+	printf("Adding a new player...\n");
 	[game addPlayer: [Player player]];
 
-	NSLog(@"Adding a new player...");
+	printf("Adding a new player...\n");
 	[game addPlayer: [Player player]];
 
 
 	for(i=0; i<5; i++) {
 		[game nextRound];
-		NSLog(@"Starting a round: %@", game);
+		printf("Starting a round: %s\n", [[game description] cString]);
 
 		en = [[game players] objectEnumerator];
 
 		while((obj = [en nextObject]))
 		{
-			NSLog(@"%@", obj);
+			printf("%s\n", [[obj description] cString]);
 		}
 		winner = [game roundWinner];
 		if(winner) {
-			NSLog(@"Winner: %@", winner);
+			printf("Winner: %s\n", [[winner description] cString]);
 		} else {
-			NSLog(@"Match ended in a draw!");
+			printf("Match ended in a draw!\n");
 		}
 	}
 
