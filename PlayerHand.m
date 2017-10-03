@@ -96,9 +96,10 @@ PlayerHand ScoreHand(id hand, int *highVal)
 		en = [sorted objectEnumerator];
 		die = [en nextObject];
 		c = [die value];
-		if(c < 2) {
+		if(c <= 2) {
 			while((die = [en nextObject])) {
 				if([die value] != ++c) {
+					c = 0;
 					break;
 				}
 			}
