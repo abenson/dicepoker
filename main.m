@@ -17,8 +17,6 @@ int main(int argc, char *argv[])
 
 	id winner;
 
-	BOOL cont = YES;
-
 	srand(time(NULL));
 
 	pool = [[NSAutoreleasePool alloc] init];
