@@ -23,10 +23,10 @@ int main(int argc, char *argv[])
 
 	game = [[Game alloc] init];
 
-	printf("Adding a new player...\n");
+	puts("Adding a new player...");
 	[game addPlayer: [[Player player] setBalance: 20]];
 
-	printf("Adding a new player...\n");
+	puts("Adding a new player...");
 	[game addPlayer: [[Player player] setBalance: 20]];
 
 
@@ -35,12 +35,12 @@ int main(int argc, char *argv[])
 		if(([game round] % 5) == 0) {
 			[game adjustMinBet: 2];
 		}
-		printf([[NSString stringWithFormat:@"Starting a round: %@\n", game] UTF8String]);
+		puts([[NSString stringWithFormat:@"Starting a round: %@", game] UTF8String]);
 
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
-			printf([[NSString stringWithFormat:@"%@\n", obj] UTF8String]);
+			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
 		}
 
 		winner = [game roundWinner];
@@ -48,14 +48,14 @@ int main(int argc, char *argv[])
 			[winner addWin];
 			[winner adjustBalance: [game pot]];
 			[game setPot: 0];
-			printf([[NSString stringWithFormat:@"Winner: %@\n\n", winner] UTF8String]);
+			puts([[NSString stringWithFormat:@"Winner: %@\n", winner] UTF8String]);
 		} else {
-			printf("Match ended in a draw!\n\n");
+			puts("Match ended in a draw!\n");
 		}
 	}
 
 	winner = [[game leaderBoard] objectAtIndex: 0];
-	printf([[NSString stringWithFormat:@"Game Winner: %@\n\n", winner] UTF8String]);
+	puts([[NSString stringWithFormat:@"Game Winner: %@\n", winner] UTF8String]);
 
 
 	[game release];
