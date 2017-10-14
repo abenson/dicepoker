@@ -14,8 +14,10 @@
 
 -init;
 
--roll;
+-(int)playerNo;
 
+-roll;
+-reroll: (int) index;
 -hand;
 
 -(int)balance;
