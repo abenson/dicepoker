@@ -28,9 +28,20 @@ int playerCount = 1;
 	return self;
 }
 
+-(int)playerNo
+{
+	return m_playerNo;
+}
+
 -roll
 {
 	[m_hand makeObjectsPerformSelector:@selector(roll)];
+	return self;
+}
+
+-reroll: (int)index
+{
+	[[m_hand objectAtIndex: index] roll];
 	return self;
 }
 

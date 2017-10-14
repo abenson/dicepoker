@@ -17,6 +17,13 @@ int main(int argc, char *argv[])
 
 	id winner;
 
+	int die = 0;
+
+	char buf[10];
+	NSString *str;
+	NSArray *arr;
+	id elen, el;
+
 	srand(time(NULL));
 
 	pool = [[NSAutoreleasePool alloc] init];
@@ -37,10 +44,46 @@ int main(int argc, char *argv[])
 		}
 		puts([[NSString stringWithFormat:@"Starting a round: %@", game] UTF8String]);
 
+		/* initial roll */
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
 			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+		}
+
+		/* offer chance to reroll */
+		en = [[game players] objectEnumerator];
+		while((obj = [en nextObject]))
+		{
+			puts([[NSString stringWithFormat:@"Player %d, which dice would you like to reroll (n for none, a for all)?", [obj playerNo]] UTF8String]);
+			puts([[NSString stringWithFormat:@"%@", [obj hand]] UTF8String]);
+			printf(" 1  2  3  4  5\n> ");
+			fflush(stdout);
+			fgets(buf, 10, stdin);
+			if(strncmp(buf, "n", 1) == 0) {
+				continue;
+			} else if(strncmp(buf, "a", 1) == 0) {
+				[obj roll];
+				puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+				continue;
+			} else if(strncmp(buf, "q", 1) == 0) {
+				[game endGame];
+				break;
+			}
+
+			str = [[NSString stringWithUTF8String: buf] retain];
+			arr = [[str componentsSeparatedByString:@" "] retain];
+			elen = [arr objectEnumerator];
+			while( (el = [elen nextObject])) {
+				die = atoi([el UTF8String]);
+				if(die < 1 || die > 5) {
+					printf("Ignoring invalid die: %s\n", [el UTF8String]);
+					continue;
+				}
+				[obj reroll: (die-1)];
+			}
+			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+			[str release];
 		}
 
 		winner = [game roundWinner];
