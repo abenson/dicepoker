@@ -8,6 +8,7 @@
 	int m_round;
 	int m_pot;
 	int m_minBet;
+	BOOL m_manualGameOver;
 }
 
 -init;
@@ -27,6 +28,8 @@
 
 -description;
 -players;
+
+-endGame;
 
 -(int)round;
 

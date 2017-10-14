@@ -119,12 +119,20 @@
 {
 	id en, obj;
 	en = [m_players objectEnumerator];
+	if(m_manualGameOver == YES) {
+		return YES;
+	}
 	while((obj = [en nextObject])) {
 		if([obj balance] < m_minBet) {
 			return YES;
 		}
 	}
 	return NO;
+}
+
+-endGame
+{
+	m_manualGameOver = YES;
 }
 
 -leaderBoard
