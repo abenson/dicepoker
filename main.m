@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 				}
 				[obj reroll: (die-1)];
 			}
-			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+			puts([[NSString stringWithFormat:@"%@\n", obj] UTF8String]);
 			[str release];
 			[scan release];
 		}
