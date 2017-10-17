@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 				break;
 			}
 
-			str = [[NSString stringWithUTF8String: buf] retain];
+			str = [[[NSString stringWithUTF8String: buf] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
 			arr = [[str componentsSeparatedByString:@" "] retain];
 			elen = [arr objectEnumerator];
 			while( (el = [elen nextObject])) {
