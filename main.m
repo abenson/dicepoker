@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		if(([game round] % 5) == 0) {
 			[game adjustMinBet: 2];
 		}
-		puts([[NSString stringWithFormat:@"Starting a round: %@", game] UTF8String]);
+		puts([[NSString stringWithFormat:@"Starting a round: %@\n", game] UTF8String]);
 
 		/* initial roll */
 		en = [[game players] objectEnumerator];
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
-			puts([[NSString stringWithFormat:@"Player %d, which dice would you like to reroll (n for none, a for all)?", [obj playerNo]] UTF8String]);
+			puts([[NSString stringWithFormat:@"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?", [obj playerNo]] UTF8String]);
 			puts([[NSString stringWithFormat:@"%@", [obj hand]] UTF8String]);
 			printf(" 1  2  3  4  5\n> ");
 			fflush(stdout);
@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
 			arr = [[str componentsSeparatedByString:@" "] retain];
 			elen = [arr objectEnumerator];
 			while( (el = [elen nextObject])) {
+				if([el isEmpty])
 				die = atoi([el UTF8String]);
 				if(die < 1 || die > 5) {
 					printf("Ignoring invalid die: %s\n", [el UTF8String]);
