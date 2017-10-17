@@ -58,31 +58,33 @@ int main(int argc, char *argv[])
 			printf(" 1  2  3  4  5\n> ");
 			fflush(stdout);
 			fgets(buf, 10, stdin);
-			if(strncmp(buf, "n", 1) == 0) {
+
+			str = [[[NSString stringWithUTF8String: buf] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
+
+			if([str isEqual: @"n"] || [str isEqual: @""]) {
 				continue;
-			} else if(strncmp(buf, "a", 1) == 0) {
+			} else if([str isEqual: @"a"]) {
 				[obj roll];
 				puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
 				continue;
-			} else if(strncmp(buf, "q", 1) == 0) {
+			} else if([str isEqual: @"q"]) {
 				[game endGame];
 				break;
 			}
 
-			str = [[[NSString stringWithUTF8String: buf] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
-			arr = [[str componentsSeparatedByString:@" "] retain];
-			elen = [arr objectEnumerator];
-			while( (el = [elen nextObject])) {
-				if([el isEmpty])
-				die = atoi([el UTF8String]);
+
+			scan = [[NSScanner alloc] initWithString: str];
+
+			while([scan scanInt: &die]) {
 				if(die < 1 || die > 5) {
-					printf("Ignoring invalid die: %s\n", [el UTF8String]);
+					printf("Ignoring invalid die: %d\n", die);
 					continue;
 				}
 				[obj reroll: (die-1)];
 			}
 			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
 			[str release];
+			[scan release];
 		}
 
 		winner = [game roundWinner];
