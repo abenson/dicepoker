@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	NSString *str;
 	NSScanner *scan;
 
-	srand(time(NULL));
+	srandom(time(NULL));
 
 	pool = [[NSAutoreleasePool alloc] init];
 

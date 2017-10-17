@@ -23,7 +23,7 @@
 
 -(int)roll
 {
-	m_value = (rand() % 6) + 1;
+	m_value = (random() % 6) + 1;
 	return m_value;
 }
 
