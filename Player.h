@@ -7,7 +7,7 @@
 	int m_wins;
 	int m_playerNo;
 	int m_balance;
-	id m_hand;
+	NSArray *m_hand;
 }
 
 +player;

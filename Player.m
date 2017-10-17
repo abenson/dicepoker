@@ -41,7 +41,9 @@ int playerCount = 1;
 
 -reroll: (int)index
 {
-	[[m_hand objectAtIndex: index] roll];
+	Die *die;
+	die = [m_hand objectAtIndex: index];
+	[die roll];
 	return self;
 }
 
