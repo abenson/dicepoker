@@ -11,18 +11,18 @@
 
 int main(int argc, char *argv[])
 {
-	id pool;
-	id en, obj;
-	id game;
+	NSAutoreleasePool *pool;
+	NSEnumerator *en;
+	Player *obj;
+	Game *game;
 
-	id winner;
+	Player *winner;
 
 	int die = 0;
 
 	char buf[10];
 	NSString *str;
-	NSArray *arr;
-	id elen, el;
+	NSScanner *scan;
 
 	srand(time(NULL));
 
