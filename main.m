@@ -30,10 +30,8 @@ int main(int argc, char *argv[])
 
 	game = [[Game alloc] init];
 
-	puts("Adding a new player...");
 	[game addPlayer: [[Player player] setBalance: 20]];
 
-	puts("Adding a new player...");
 	[game addPlayer: [[Player player] setBalance: 20]];
 
 
