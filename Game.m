@@ -133,6 +133,7 @@
 -endGame
 {
 	m_manualGameOver = YES;
+	return self;
 }
 
 -leaderBoard
