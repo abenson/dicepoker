@@ -9,6 +9,56 @@
 #import "Die.h"
 #import "PlayerHand.h"
 
+int PrintToStream(FILE *stream, NSString *format, va_list args)
+{
+	int ret;
+    NSString *string;
+    string = [[NSString alloc] initWithFormat: format  arguments: args];
+    ret = fprintf(stream, "%s", [string cStringUsingEncoding: NSASCIIStringEncoding]);
+    [string release];
+	return ret;
+}
+
+int Print(NSString *format, ...)
+{
+	int ret;
+	va_list args;
+	va_start (args, format);
+	ret = PrintToStream(stdout, format, args);
+	va_end (args);
+	return ret;
+}
+
+int PrintErr(NSString *format, ...)
+{
+	int ret;
+	va_list args;
+	va_start (args, format);
+	ret = PrintToStream(stderr, format, args);
+	va_end (args);
+	return ret;
+}
+
+NSString* ReadLineF(FILE *input, size_t len)
+{
+	char *r_str;
+	NSString *str;
+
+	r_str = malloc(len + 1);
+	r_str = fgets(r_str, len, input);
+
+	str = [NSString stringWithUTF8String: r_str];
+
+	free(r_str);
+
+	return str;
+}
+
+NSString* ReadLine(void)
+{
+	return ReadLineF(stdin, 255);
+}
+
 int main(int argc, char *argv[])
 {
 	NSAutoreleasePool *pool;
@@ -20,7 +70,6 @@ int main(int argc, char *argv[])
 
 	int die = 0;
 
-	char buf[10];
 	NSString *str;
 	NSScanner *scan;
 
@@ -40,32 +89,32 @@ int main(int argc, char *argv[])
 		if(([game round] % 5) == 0) {
 			[game adjustMinBet: 2];
 		}
-		puts([[NSString stringWithFormat:@"Starting a round: %@\n", game] UTF8String]);
+		Print(@"Starting a round: %@\n", game);
 
 		/* initial roll */
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
-			puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+			Print(@"%@", obj);
 		}
 
 		/* offer chance to reroll */
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
-			puts([[NSString stringWithFormat:@"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?", [obj playerNo]] UTF8String]);
-			puts([[NSString stringWithFormat:@"%@", [obj hand]] UTF8String]);
-			printf(" 1  2  3  4  5\n> ");
+			Print(@"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?\n", [obj playerNo]);
+			Print(@"%@\n", [obj hand]);
+			Print(@" 1  2  3  4  5\n> ");
 			fflush(stdout);
-			fgets(buf, 10, stdin);
 
-			str = [[[NSString stringWithUTF8String: buf] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
+			str = [[ReadLine() stringByTrimmingCharactersInSet:
+				[NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
 
 			if([str isEqual: @"n"] || [str isEqual: @""]) {
 				continue;
 			} else if([str isEqual: @"a"]) {
 				[obj roll];
-				puts([[NSString stringWithFormat:@"%@", obj] UTF8String]);
+				Print(@"%@", obj);
 				continue;
 			} else if([str isEqual: @"q"]) {
 				[game endGame];
@@ -77,12 +126,12 @@ int main(int argc, char *argv[])
 
 			while([scan scanInt: &die]) {
 				if(die < 1 || die > 5) {
-					printf("Ignoring invalid die: %d\n", die);
+					Print(@"Ignoring invalid die: %d\n", die);
 					continue;
 				}
 				[obj reroll: (die-1)];
 			}
-			puts([[NSString stringWithFormat:@"%@\n", obj] UTF8String]);
+			Print(@"%@\n", obj);
 			[str release];
 			[scan release];
 		}
@@ -92,14 +141,14 @@ int main(int argc, char *argv[])
 			[winner addWin];
 			[winner adjustBalance: [game pot]];
 			[game setPot: 0];
-			puts([[NSString stringWithFormat:@"Winner: %@\n", winner] UTF8String]);
+			Print(@"Winner: %@\n", winner);
 		} else {
-			puts("Match ended in a draw!\n");
+			Print(@"Match ended in a draw!\n");
 		}
 	}
 
 	winner = [[game leaderBoard] objectAtIndex: 0];
-	puts([[NSString stringWithFormat:@"Game Winner: %@\n", winner] UTF8String]);
+	Print(@"Game Winner: %@\n", winner);
 
 
 	[game release];
