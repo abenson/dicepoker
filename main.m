@@ -12,10 +12,10 @@
 int PrintToStream(FILE *stream, NSString *format, va_list args)
 {
 	int ret;
-    NSString *string;
-    string = [[NSString alloc] initWithFormat: format  arguments: args];
-    ret = fprintf(stream, "%s", [string cStringUsingEncoding: NSASCIIStringEncoding]);
-    [string release];
+	NSString *string;
+	string = [[NSString alloc] initWithFormat: format  arguments: args];
+	ret = fprintf(stream, "%s", [string cStringUsingEncoding: NSASCIIStringEncoding]);
+	[string release];
 	return ret;
 }
 
