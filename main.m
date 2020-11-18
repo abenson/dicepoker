@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
-			Print(@"%@", obj);
+			Print(@"%@\n", obj);
 		}
 
 		/* offer chance to reroll */
