@@ -41,13 +41,15 @@ int PrintErr(NSString *format, ...)
 
 NSString* ReadLineF(FILE *input, size_t len)
 {
-	char *r_str;
-	NSString *str;
+	char *r_str, *r_val;
+	NSString *str = NULL;
 
 	r_str = malloc(len + 1);
-	r_str = fgets(r_str, len, input);
+	r_val = fgets(r_str, len, input);
 
-	str = [NSString stringWithUTF8String: r_str];
+	if(r_val) {
+		str = [NSString stringWithUTF8String: r_str];
+	}
 
 	free(r_str);
 
@@ -102,12 +104,21 @@ int main(int argc, char *argv[])
 		en = [[game players] objectEnumerator];
 		while((obj = [en nextObject]))
 		{
+			NSString *lineRead;
 			Print(@"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?\n", [obj playerNo]);
 			Print(@"%@\n", [obj hand]);
 			Print(@" 1  2  3  4  5\n> ");
 			fflush(stdout);
 
-			str = [[ReadLine() stringByTrimmingCharactersInSet:
+			lineRead = ReadLine();
+
+			if(lineRead == NULL) {
+				Print(@"Ending game!\n");
+				[game endGame];
+				break;
+			}
+
+			str = [[lineRead stringByTrimmingCharactersInSet:
 				[NSCharacterSet whitespaceAndNewlineCharacterSet]] retain];
 
 			if([str isEqual: @"n"] || [str isEqual: @""]) {
