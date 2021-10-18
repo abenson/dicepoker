@@ -56,7 +56,9 @@
 
 -description
 {
-	return [NSString stringWithFormat: @"Round %d, %lu Players, Pot is $%d, Bet is $%d", m_round, [m_players count], m_pot, m_minBet];
+	return [NSString stringWithFormat:
+		@"Round %d, %lu Players, Pot is $%d, Bet is $%d",
+		m_round, [m_players count], m_pot, m_minBet];
 }
 
 -players
