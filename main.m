@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 		if(([game round] % 5) == 0) {
 			[game adjustMinBet: 2];
 		}
-		Print(@"Starting a round: %@\n", game);
+		Print(@"\nStarting a round: %@\n", game);
 
 		/* initial roll */
 		en = [[game players] objectEnumerator];
@@ -152,9 +152,9 @@ int main(int argc, char *argv[])
 			[winner addWin];
 			[winner adjustBalance: [game pot]];
 			[game setPot: 0];
-			Print(@"Winner: %@\n", winner);
+			Print(@"\nWinner: %@\n", winner);
 		} else {
-			Print(@"Match ended in a draw!\n");
+			Print(@"\nMatch ended in a draw!\n");
 		}
 	}
 
