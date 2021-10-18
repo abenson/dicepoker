@@ -9,6 +9,8 @@
 #import "Die.h"
 #import "PlayerHand.h"
 
+#define VERSION "1.0.0"
+
 int PrintToStream(FILE *stream, NSString *format, va_list args)
 {
 	int ret;
@@ -78,6 +80,8 @@ int main(int argc, char *argv[])
 	srandom(time(NULL));
 
 	pool = [[NSAutoreleasePool alloc] init];
+
+	Print(@"Welcome to DICEPOKER! (v%s)\n", VERSION);
 
 	game = [[Game alloc] init];
 
