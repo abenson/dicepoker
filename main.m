@@ -91,9 +91,6 @@ int main(int argc, char *argv[])
 
 
 	while([game gameOver] == NO) {
-		if(([game round] % 5) == 0) {
-			[game adjustMinBet: 2];
-		}
 		[game nextRound];
 		Print(@"\nStarting a round: %@\n", game);
 
@@ -162,6 +159,9 @@ int main(int argc, char *argv[])
 			Print(@"\nWinner!\n%@\n", winner);
 		} else {
 			Print(@"\nMatch ended in a draw!\n");
+		}
+		if(([game round] % 5) == 0) {
+			[game adjustMinBet: 2];
 		}
 	}
 
