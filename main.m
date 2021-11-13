@@ -91,10 +91,10 @@ int main(int argc, char *argv[])
 
 
 	while([game gameOver] == NO) {
-		[game nextRound];
 		if(([game round] % 5) == 0) {
 			[game adjustMinBet: 2];
 		}
+		[game nextRound];
 		Print(@"\nStarting a round: %@\n", game);
 
 		/* initial roll */
