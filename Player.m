@@ -87,7 +87,8 @@ int playerCount = 1;
 
 	ph = ScoreHand(m_hand, &high);
 
-	return [NSString stringWithFormat: @"Player %d: Balance: $%d, Wins: %d, Hand: %@ %@, High: %d",
+	return [NSString stringWithFormat:
+		@"Player %d: Balance: $%d, Wins: %d, Hand: %@ %@, High: %d",
 		m_playerNo,
 		m_balance,
 		m_wins,

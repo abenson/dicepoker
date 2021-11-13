@@ -47,9 +47,11 @@ PlayerHand ScoreHand(id hand, int *highVal)
 	while((die = [en nextObject])) {
 		count = [counts objectForKey: [NSNumber numberWithInt: [die value]]];
 		if(count == nil) {
-			[counts setObject: [NSNumber numberWithInt: 1] forKey: [NSNumber numberWithInt: [die value]]];
+			[counts setObject:[NSNumber numberWithInt: 1]
+			 forKey: [NSNumber numberWithInt: [die value]]];
 		} else {
-			[counts setObject: [NSNumber numberWithInt: ([count intValue]+1)] forKey: [NSNumber numberWithInt: [die value]]];
+			[counts setObject: [NSNumber numberWithInt: ([count intValue]+1)]
+			 forKey: [NSNumber numberWithInt: [die value]]];
 		}
 	}
 

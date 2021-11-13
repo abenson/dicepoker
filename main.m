@@ -109,7 +109,10 @@ int main(int argc, char *argv[])
 		while((obj = [en nextObject]))
 		{
 			NSString *lineRead;
-			Print(@"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?\n", [obj playerNo]);
+			Print(
+			 @"\nPlayer %d, which dice would you like to reroll (n for none, a for all)?\n",
+			 [obj playerNo]
+			);
 			Print(@"%@\n", [obj hand]);
 			Print(@" 1  2  3  4  5\n> ");
 			fflush(stdout);
@@ -163,7 +166,11 @@ int main(int argc, char *argv[])
 	}
 
 	winner = [[game leaderBoard] objectAtIndex: 0];
-	Print(@"Game Winner: %@\n", winner);
+	Print(
+	 @"\nGame Winner: Player %d with $%d\n",
+	 [winner playerNo],
+	 [winner balance]
+	);
 
 
 	[game release];
