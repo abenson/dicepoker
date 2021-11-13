@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 			[winner addWin];
 			[winner adjustBalance: [game pot]];
 			[game setPot: 0];
-			Print(@"\nWinner: %@\n", winner);
+			Print(@"\nWinner!\n%@\n", winner);
 		} else {
 			Print(@"\nMatch ended in a draw!\n");
 		}
